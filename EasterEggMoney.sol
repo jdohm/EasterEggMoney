@@ -18,9 +18,7 @@ contract EasterEggMoney{
     function find(address payable _address, string memory _passphrase) public returns(uint findersNR, uint balance) {
         if(keccak256(bytes(_passphrase)) == passHash){
         findersCount ++;
-        //attach 
-        
-        // if(funds-fees > 0 && adress == valid??) send available funds to adress
+        //send available funds to adress
         _address.transfer(address(this).balance);
         }
         return (findersCount, address(this).balance);
@@ -30,10 +28,7 @@ contract EasterEggMoney{
     function find(string memory _passphrase) public returns(uint findersNR, uint balance) {
         if(keccak256(bytes(_passphrase)) == passHash){
         findersCount ++;
-        //attach 
-        
-        // if(funds-fees > 0 && adress == valid??) send available funds to adress
-        //address payable addrSender = address(msg.sender);
+        //send available funds to adress
         payable(msg.sender).transfer(address(this).balance);
         }
         return (findersCount, address(this).balance);
