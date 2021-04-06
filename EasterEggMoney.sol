@@ -5,8 +5,11 @@ contract EasterEggMoney{
     bytes32 passHash;
     uint public findersCount = 0;
     
-    constructor(string memory _passphrase) payable {
-        passHash = keccak256(bytes(_passphrase));
+    //set passHash
+    //you can get the hash value from https://www.keccak-256.cloxy.net/ for example
+    //choose a strong password!
+    constructor(bytes32 _passHash) payable {
+        passHash = _passHash;
     }
     
     //function to add new funds to EasterEggMoney pool for new finders to be rewarded
