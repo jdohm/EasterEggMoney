@@ -3,6 +3,7 @@ pragma solidity 0.8.3;
 
 contract EasterEggMoney{
     bytes32 passHash;
+    address owner;
     uint public findersCount = 0;
     
     //set passHash
@@ -10,6 +11,7 @@ contract EasterEggMoney{
     //choose a strong password!
     constructor(bytes32 _passHash) payable {
         passHash = _passHash;
+        owner = msg.sender;
     }
     
     //function to add new funds to EasterEggMoney pool for new finders to be rewarded
@@ -35,5 +37,11 @@ contract EasterEggMoney{
         payable(msg.sender).transfer(address(this).balance);
         }
         return (findersCount, address(this).balance);
+    }
+
+    //function to update passphrase after EasterEgg was found
+    function updatepw(bytes32 _passHash) payable public {
+    require(msg.sender == owner);
+    passHash = _passHash;
     }
 }
